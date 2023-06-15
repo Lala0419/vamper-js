@@ -45,12 +45,15 @@ class Vampire {
 		console.log("name arg:", name);
 		console.log("this.name:", this.name);
 		if (name === this.name) {
-			result = this;
+			result = this; //van3
 		}
 
 		for (const vampire of this.offspring) {
 			console.log("vampire:", vampire);
 			result = result || vampire.vampireWithName(name);
+			//vampire3.vampireWithName(vampire3)
+			//vampire2.vmpireWithName(vampire3)
+			//vampire1, vanpireWithName(vampire3)
 		}
 
 		// console.log("this:", this);
@@ -58,10 +61,37 @@ class Vampire {
 	}
 
 	// Returns the total number of vampires that exist
-	get totalDescendents() {}
+
+	//root.totalDescendents
+	get totalDescendents() {
+		let vampire = 0;
+
+		for (const child of this.offspring) {
+			vampire += child.totalDescendents + 1; //1 is the child itself
+
+			console.log(
+				"child.totalDescendents:",
+				child.totalDescendents,
+				child.name
+			);
+		}
+
+		return vampire;
+	}
+
+	// check test and write down the tree first. Easier to see the whole picture visually.
 
 	// Returns an array of all the vampires that were converted after 1980
-	get allMillennialVampires() {}
+	get allMillennialVampires() {
+		let vampire = [];
+		if (this.yearConverted > 1980) {
+			vampire.push(this);
+		}
+		for (const childVampire of this.offspring) {
+			vampire = vampire.concat(childVampire.allMillennialVampires);
+		}
+		return vampire;
+	}
 
 	/** Stretch **/
 

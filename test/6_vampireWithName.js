@@ -25,7 +25,7 @@ describe("Vampire", function () {
 		});
 
 		context("when searching with a name that exists in the tree", () => {
-			it("should return the vampire with that name", () => {
+			it.only("should return the vampire with that name", () => {
 				expect(rootVampire.vampireWithName(rootVampire.name).name).to.equal(
 					rootVampire.name
 				);
